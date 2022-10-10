@@ -1,5 +1,13 @@
 # rollup changelog
 
+## 2.79.99
+
+\_2022-10-10
+
+### Export NodeConstructors
+
+- export nodeConstructor module
+
 ## 2.79.1
 
 _2022-09-22_
