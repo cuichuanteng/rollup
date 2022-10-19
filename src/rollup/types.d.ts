@@ -638,6 +638,7 @@ export type NormalizedAmdOptions = (
 ) & {
 	define: string;
 	forceJsExtensionForImports: boolean;
+	renderChunkId?: <T>(T) => T;
 };
 
 export interface OutputOptions {

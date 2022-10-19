@@ -35,9 +35,12 @@ export default function amd(
 	}: NormalizedOutputOptions
 ): Bundle {
 	warnOnBuiltins(warn, dependencies);
-	const deps = dependencies.map(
-		m => `'${updateExtensionForRelativeAmdId(m.id, amd.forceJsExtensionForImports)}'`
-	);
+	const { renderChunkId } = amd;
+	const deps = renderChunkId
+		? renderChunkId<string[]>(dependencies)
+		: dependencies.map(
+				m => `'${updateExtensionForRelativeAmdId(m.id, amd.forceJsExtensionForImports)}'`
+		  );
 	const args = dependencies.map(m => m.name);
 	const { n, getNonArrowFunctionIntro, _ } = snippets;
 
@@ -56,7 +59,7 @@ export default function amd(
 		deps.unshift(`'module'`);
 	}
 
-	const completeAmdId = getCompleteAmdId(amd, id);
+	const completeAmdId = renderChunkId ? renderChunkId<string>(id) : getCompleteAmdId(amd, id);
 	const params =
 		(completeAmdId ? `'${completeAmdId}',${_}` : ``) +
 		(deps.length ? `[${deps.join(`,${_}`)}],${_}` : ``);

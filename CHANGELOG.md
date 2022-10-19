@@ -8,6 +8,10 @@
 
 - export nodeConstructor module
 
+### Features
+
+- Add `amd.renderChunkId` to rewrite module ID and dependency ID
+
 ## 2.79.1
 
 _2022-09-22_
