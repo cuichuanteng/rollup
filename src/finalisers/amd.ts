@@ -1,4 +1,5 @@
 import type { Bundle, Bundle as MagicStringBundle } from 'magic-string';
+import { ChunkDependencies } from '../Chunk';
 import type { NormalizedOutputOptions } from '../rollup/types';
 import getCompleteAmdId from './shared/getCompleteAmdId';
 import { getExportBlock, getNamespaceMarkers } from './shared/getExportBlock';
@@ -37,7 +38,7 @@ export default function amd(
 	warnOnBuiltins(warn, dependencies);
 	const { renderChunkId } = amd;
 	const deps = renderChunkId
-		? renderChunkId<string[]>(dependencies)
+		? renderChunkId<ChunkDependencies, string[]>(dependencies)
 		: dependencies.map(
 				m => `'${updateExtensionForRelativeAmdId(m.id, amd.forceJsExtensionForImports)}'`
 		  );
@@ -59,7 +60,9 @@ export default function amd(
 		deps.unshift(`'module'`);
 	}
 
-	const completeAmdId = renderChunkId ? renderChunkId<string>(id) : getCompleteAmdId(amd, id);
+	const completeAmdId = renderChunkId
+		? renderChunkId<string, string>(id)
+		: getCompleteAmdId(amd, id);
 	const params =
 		(completeAmdId ? `'${completeAmdId}',${_}` : ``) +
 		(deps.length ? `[${deps.join(`,${_}`)}],${_}` : ``);
