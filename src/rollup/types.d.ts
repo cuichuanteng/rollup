@@ -624,6 +624,7 @@ export type AmdOptions = (
 ) & {
 	define?: string;
 	forceJsExtensionForImports?: boolean;
+	renderChunkId?: <Input, Output>(input: Input) => Output;
 };
 
 export type NormalizedAmdOptions = (
