@@ -231,6 +231,7 @@ const getAmd = (config: OutputOptions): NormalizedOutputOptions['amd'] => {
 		define: string;
 		forceJsExtensionForImports: boolean;
 		id?: string;
+		renderChunkId?: NormalizedOutputOptions['amd']['renderChunkId'];
 	} = {
 		autoId: false,
 		basePath: '',
@@ -261,19 +262,19 @@ const getAmd = (config: OutputOptions): NormalizedOutputOptions['amd'] => {
 	let normalized: NormalizedOutputOptions['amd'];
 	if (mergedOption.autoId) {
 		normalized = {
-			...mergedOption,
 			autoId: true,
 			basePath: mergedOption.basePath,
 			define: mergedOption.define,
-			forceJsExtensionForImports: mergedOption.forceJsExtensionForImports
+			forceJsExtensionForImports: mergedOption.forceJsExtensionForImports,
+			renderChunkId: config.amd?.renderChunkId
 		};
 	} else {
 		normalized = {
-			...mergedOption,
 			autoId: false,
 			define: mergedOption.define,
 			forceJsExtensionForImports: mergedOption.forceJsExtensionForImports,
-			id: mergedOption.id
+			id: mergedOption.id,
+			renderChunkId: config.amd?.renderChunkId
 		};
 	}
 	return normalized;
