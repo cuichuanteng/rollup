@@ -1,5 +1,4 @@
 import type { Bundle, Bundle as MagicStringBundle } from 'magic-string';
-import { ChunkDependencies } from '../Chunk';
 import type { NormalizedOutputOptions } from '../rollup/types';
 import getCompleteAmdId from './shared/getCompleteAmdId';
 import { getExportBlock, getNamespaceMarkers } from './shared/getExportBlock';
