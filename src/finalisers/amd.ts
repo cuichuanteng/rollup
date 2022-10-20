@@ -38,7 +38,7 @@ export default function amd(
 	warnOnBuiltins(warn, dependencies);
 	const { renderChunkId } = amd;
 	const deps = renderChunkId
-		? renderChunkId<ChunkDependencies, string[]>(dependencies)
+		? (renderChunkId(dependencies) as string[])
 		: dependencies.map(
 				m => `'${updateExtensionForRelativeAmdId(m.id, amd.forceJsExtensionForImports)}'`
 		  );
@@ -60,9 +60,7 @@ export default function amd(
 		deps.unshift(`'module'`);
 	}
 
-	const completeAmdId = renderChunkId
-		? renderChunkId<string, string>(id)
-		: getCompleteAmdId(amd, id);
+	const completeAmdId = renderChunkId ? (renderChunkId(id) as string) : getCompleteAmdId(amd, id);
 	const params =
 		(completeAmdId ? `'${completeAmdId}',${_}` : ``) +
 		(deps.length ? `[${deps.join(`,${_}`)}],${_}` : ``);

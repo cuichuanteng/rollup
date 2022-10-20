@@ -8,6 +8,10 @@
 
 - export nodeConstructor module
 
+### Bug Fixes
+
+- Fix getAmd function does not support configuration item extension
+
 ### Features
 
 - Add `amd.renderChunkId` to rewrite module ID and dependency ID

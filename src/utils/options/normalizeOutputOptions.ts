@@ -261,6 +261,7 @@ const getAmd = (config: OutputOptions): NormalizedOutputOptions['amd'] => {
 	let normalized: NormalizedOutputOptions['amd'];
 	if (mergedOption.autoId) {
 		normalized = {
+			...mergedOption,
 			autoId: true,
 			basePath: mergedOption.basePath,
 			define: mergedOption.define,
@@ -268,6 +269,7 @@ const getAmd = (config: OutputOptions): NormalizedOutputOptions['amd'] => {
 		};
 	} else {
 		normalized = {
+			...mergedOption,
 			autoId: false,
 			define: mergedOption.define,
 			forceJsExtensionForImports: mergedOption.forceJsExtensionForImports,
